@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="true">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%n[%p] %d{dd.MM.yyyy - HH:mm:ss} %logger{0}.%M %highlight{:> %msg }{INFO=white, TRACE=blue bold, DEBUG=YELLOW bold, WARN=cyan bold, ERROR=red }"
+                    disableAnsi="false"/>
+        </Console>
+        <File name="FileLog" fileName="target/logs/log.txt">
+            <PatternLayout
+                    pattern="%highlight{%n[%-5level] %d{dd.MM.yyyy - HH:mm:ss} %logger{0}.%M :> %msg}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue}"
+                    disableAnsi="true"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FileLog"/>
+        </Root>
+        <Logger name="org.hibernate" level="error" additivity="false">
+            <AppenderRef ref="FileLog"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+    </Loggers>
+</Configuration>
